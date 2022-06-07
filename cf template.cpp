@@ -43,7 +43,6 @@ int main () {
 	cin >> tc;
 	while (tc --) {
 
-		cout << "Hello World! << endl;
 	}
 	return 0;
 }
