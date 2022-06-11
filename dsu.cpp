@@ -1,10 +1,10 @@
 class DSU {
 private:
-    unordered_map<int, int> parent;
-    unordered_map<int, int> rank;
+    unordered_map<ll, ll> parent;
+    unordered_map<ll, ll> rank;
     
 public:
-    DSU (int node) {
+    DSU (ll node) {
         if (parent.find(node) != parent.end()) {
             return;
         } else {
@@ -13,16 +13,16 @@ public:
         }
     }
     
-    int findParent(int node) {
+    ll findParent(ll node) {
         if (node == parent[node]) {
             return node;
         }
         return parent[node] = findParent(parent[node]);
     }
     
-    void unionByRank(int a, int b) {
-        int A = findParent(a);
-        int B = findParent(b);
+    void unionByRank(ll a, ll b) {
+        ll A = findParent(a);
+        ll B = findParent(b);
         
         if (A == B) {
             return;
