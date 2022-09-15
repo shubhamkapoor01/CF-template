@@ -18,14 +18,20 @@ class DSU {
 private:
     unordered_map<ll, ll, custom_hash> parent;
     unordered_map<ll, ll, custom_hash> rank;
-    
+    unordered_map<ll, ll, custom_hash> size;
+    unordered_map<ll, ll, custom_hash> mx;
+    unordered_map<ll, ll, custom_hash> mi;
+
 public:
     void makeNode (ll node) {
         if (parent.find(node) != parent.end()) {
             return;
         } else {
             parent[node] = node;
+            mx[node] = node;
+            mi[node] = node;
             rank[node] = 1;
+            size[node] = 1;
         }
     }
     
@@ -37,6 +43,18 @@ public:
             return node;
         }
         return parent[node] = findParent(parent[node]);
+    }
+
+    ll getMin(ll node) {
+    	return mi[findParent(node)];
+    }
+
+    ll getMax(ll node) {
+    	return mx[findParent(node)];
+    }
+
+    ll getSize(ll node) {
+    	return size[findParent(node)];
     }
     
     void unionByRank(ll a, ll b) {
@@ -52,6 +70,9 @@ public:
         }
         
         parent[B] = A;
+        size[A] += size[B];
+        mx[A] = max(mx[A], mx[B]);
+        mi[A] = min(mi[A], mi[B]);
         
         if (rank[A] == rank[B]) {
             rank[A] ++;
