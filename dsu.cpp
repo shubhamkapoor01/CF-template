@@ -30,6 +30,9 @@ public:
     }
     
     ll findParent(ll node) {
+    	if (parent.find(node) == parent.end()) {
+    		makeNode(node);
+    	}
         if (node == parent[node]) {
             return node;
         }
